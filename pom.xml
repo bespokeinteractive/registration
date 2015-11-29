@@ -16,20 +16,18 @@
 	</scm>
 
 	<distributionManagement>
-        <!-- use the following if you're not using a snapshot version. -->
-            <repository>
-                <id>shimla-nexus</id>
-                <name>Shimla nexus repo</name>
-                <url>http://hospdev.hispindia.org/nexus/content/repositories/version3.1-releases/</url>
-            </repository>
-        <!-- use the following if you ARE using a snapshot version. -->
-            <snapshotRepository>
-                <id>shimla-nexus</id>
-                <name>Shimla nexus repo</name>
-                <url>http://hospdev.hispindia.org/nexus/content/repositories/version3.1-snapshots/</url>
-                <uniqueVersion>false</uniqueVersion>
-             </snapshotRepository>
-        </distributionManagement>
+		<!-- use the following if you're not using a snapshot version. -->
+		<repository>
+			<id>afyaehms-snapshots</id>
+			<url>http://afyaehms.org:8081/nexus/content/repositories/releases</url>
+		</repository>
+		<!-- use the following if you ARE using a snapshot version. -->
+		<snapshotRepository>
+			<id>afyaehms-snapshots</id>
+			<url>http://afyaehms.org:8081/nexus/content/repositories/snapshots</url>
+			<uniqueVersion>false</uniqueVersion>
+		</snapshotRepository>
+	</distributionManagement>
 
 	<modules>
 		<module>api</module>
@@ -103,50 +101,5 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-
-	<repositories>
-		<repository>
-			<id>openmrs-repo</id>
-			<name>OpenMRS Nexus Repository</name>
-			<url>http://mavenrepo.openmrs.org/nexus/content/repositories/public</url>
-		</repository>
-		<repository>
-			<id>shimla-nexus-snapshots</id>
-			<name>OpenMRS Nexus Repository</name>
-			<url>http://hospdev.hispindia.org/nexus/content/repositories/version3.1-snapshots</url>
-		</repository>
-		<repository>
-			<id>shimla-nexus-releases</id>
-			<name>OpenMRS Nexus Repository</name>
-			<url>http://hospdev.hispindia.org/nexus/content/repositories/version3.1-releases</url>
-		</repository>
-	</repositories>
-
-	<pluginRepositories>
-		<pluginRepository>
-			<id>openmrs-repo</id>
-			<name>OpenMRS Nexus Repository</name>
-			<url>http://mavenrepo.openmrs.org/nexus/content/repositories/public</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</pluginRepository>
-		<pluginRepository>
-			<id>shimla-nexus-snapshots</id>
-			<name>shimla nexus snapshots</name>
-			<url>http://hospdev.hispindia.org/nexus/content/repositories/version3.1-snapshots</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</pluginRepository>
-		<pluginRepository>
-			<id>shimla-nexus-releases</id>
-			<name>shimla nexus releases</name>
-			<url>http://hospdev.hispindia.org/nexus/content/repositories/version3.1-releases</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</pluginRepository>
-	</pluginRepositories>
 
 </project>
