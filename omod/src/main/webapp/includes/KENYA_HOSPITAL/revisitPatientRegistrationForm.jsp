@@ -480,11 +480,11 @@ input, select, textarea {
 				return false;
 			} 
 			
-			if (jQuery("#maritalStatus").val() == "Marital") {
+			/*if (jQuery("#maritalStatus").val() == "Marital") {
 				alert("Please select marital status of the patient");
 				return false;
 			} 
-			
+			*/
 			
 			if (jQuery("#mlcCase").is(':checked')) {
 				if (StringUtils.isBlank(jQuery("#tempCat").val()))

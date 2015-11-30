@@ -64,7 +64,9 @@
 		reprint: "${param.reprint eq 'true'}",
 		//triageId: "${triageId}",
 		selectedPaymentCategory: "${selectedPaymentCategory}",
-		specialSchemeName: "${specialSchemeName}"
+		specialSchemeName: "${specialSchemeName}",
+		create:"${create}",
+		creates:"${creates}"
 	};
 </script>
 

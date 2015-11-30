@@ -235,6 +235,7 @@
 			
 		}
 		else if(MODEL.reprint=="true"){
+			
 			jQuery("#printableRegistrationFeeForFirstVisitAndReprintRow").hide();
 			if(!StringUtils.isBlank(MODEL.selectedMLC)){
 			jQuery("#mlcCaseYesField").hide();
@@ -260,6 +261,7 @@
 			jQuery("#printableRoomToVisitRow").show();
 			if(!StringUtils.isBlank(MODEL.selectedTRIAGE)){	
 			jQuery("#printableRoomToVisit").append("<span style='border:0px'>" + jQuery("#triage option:checked").html() + "</span>");
+			
 			}
             if(!StringUtils.isBlank(MODEL.selectedOPD)){
 		    jQuery("#printableRoomToVisit").append("<span style='border:0px'>" + jQuery("#opdWard option:checked").html() + "</span>");
@@ -272,7 +274,14 @@
             }	
 		    jQuery("#printableFileNumberRow").show();
             }
-		
+            
+            //alert("hmmm");
+           if((MODEL.create!=0)&&(MODEL.creates!=0)){ //alert("hiii");
+           jQuery("#patientrevisit").hide();}
+          else{ //alert("hello");
+          	jQuery("#patientrevisit").show();
+           }
+
 			jQuery("#printSlip").hide();
 			jQuery("#save").hide();
 		}
@@ -312,8 +321,7 @@
 			    if (jQuery("#paying").is(':checked')) {
 			     jQuery("#printablePaymentCategory").append("<span style='border:0px'>" + jQuery("#paying").val() + "</span>");
 			    }
-
-                if (jQuery("#nonPaying").is(':checked')) {
+				                if (jQuery("#nonPaying").is(':checked')) {
                  jQuery("#printablePaymentCategory").append("<span style='border:0px'>" + jQuery("#nonPaying").val() + "</span>");
                 }
 
@@ -631,10 +639,22 @@
 	
 function triageRoomSelection(){
 if(MODEL.patientAttributes[14]=="Paying"){
-jQuery("#selectedRegFeeValue").val('${reVisitFee}');
+	if((MODEL.create==0))
+	{  //alert("Patient Revisit within 24 hr");
+	// alert("hello");
+jQuery("#selectedRegFeeValue").val(0);
+jQuery("#patientrevisit").show();
 if(MODEL.patientAttributes[44]=="CHILD LESS THAN 5 YEARS"){
-jQuery("#selectedRegFeeValue").val(${childLessThanFiveYearRegistrationFee});
+jQuery("#selectedRegFeeValue").val(0);
 }
+	}
+else
+{
+	jQuery("#selectedRegFeeValue").val('${reVisitFee}');
+	if(MODEL.patientAttributes[44]=="CHILD LESS THAN 5 YEARS"){
+	jQuery("#selectedRegFeeValue").val(${childLessThanFiveYearRegistrationFee});
+	}
+	}
 }
 
 if(MODEL.patientAttributes[14]=="Non-Paying"){
@@ -652,26 +672,41 @@ jQuery("#printableRegistrationFee").append("<span style='margin:5px;'>" + select
 }
 
 function opdRoomSelection(){
-if(MODEL.patientAttributes[14]=="Paying"){
-jQuery("#selectedRegFeeValue").val('${reVisitFee}');
-if(MODEL.patientAttributes[44]=="CHILD LESS THAN 5 YEARS"){
-jQuery("#selectedRegFeeValue").val(${childLessThanFiveYearRegistrationFee});
-}
-}
+	if((MODEL.patientAttributes[14]=="Paying")){
+	//	alert("hii");		
+		if((MODEL.create==0))
+			{
+			// alert("Patient Revisit within 24 hr");
+			  jQuery("#selectedRegFeeValue").val(0); 
+				  jQuery("#patientrevisit").show();
+			  
+	if(MODEL.patientAttributes[44]=="CHILD LESS THAN 5 YEARS"){
+	jQuery("#selectedRegFeeValue").val(0);
+	//jQuery("#selectedRegFeeValue").show("(Patient Revisit within 24 hr)");
+	}
+			}
+		else
+		{
+			jQuery("#selectedRegFeeValue").val('${reVisitFee}');
+			if(MODEL.patientAttributes[44]=="CHILD LESS THAN 5 YEARS"){
+			jQuery("#selectedRegFeeValue").val(${childLessThanFiveYearRegistrationFee});
+			}
+			}
+	}
+	
+	if(MODEL.patientAttributes[14]=="Non-Paying"){
+	jQuery("#selectedRegFeeValue").val(0);
+	}
 
-if(MODEL.patientAttributes[14]=="Non-Paying"){
-jQuery("#selectedRegFeeValue").val(0);
-}
+	if(MODEL.patientAttributes[14]=="Special Schemes"){
+	jQuery("#selectedRegFeeValue").val(0);
+	}
 
-if(MODEL.patientAttributes[14]=="Special Schemes"){
-jQuery("#selectedRegFeeValue").val(0);
-}
+	var selectedRegFeeValue=jQuery("#selectedRegFeeValue").val();
+	jQuery("#printableRegistrationFee").empty();
+	jQuery("#printableRegistrationFee").append("<span style='margin:5px;'>" + selectedRegFeeValue + "</span>");	
 
-var selectedRegFeeValue=jQuery("#selectedRegFeeValue").val();
-jQuery("#printableRegistrationFee").empty();
-jQuery("#printableRegistrationFee").append("<span style='margin:5px;'>" + selectedRegFeeValue + "</span>");	
-
-}
+	}
 
 function specialClinicSelection(){
 
@@ -687,6 +722,16 @@ jQuery("#fileNumberRowField").hide();
 }
 
 if(MODEL.patientAttributes[14]=="Paying"){
+	if((MODEL.create==0))
+	{    //alert("Patient Revisit within 24 hr");
+		jQuery("#selectedRegFeeValue").val(0);
+		  jQuery("#patientrevisit").show();
+		if(MODEL.patientAttributes[44]=="CHILD LESS THAN 5 YEARS"){
+		jQuery("#selectedRegFeeValue").val(0);
+		}
+				}
+	else
+		{
 var reVisitRegFee=parseInt('${reVisitFee}');
 var specialClinicRegFee=parseInt('${specialClinicRegFee}');
 var totalRegFee= reVisitRegFee+specialClinicRegFee;
@@ -694,6 +739,7 @@ jQuery("#selectedRegFeeValue").val(totalRegFee);
 if(MODEL.patientAttributes[44]=="CHILD LESS THAN 5 YEARS"){
 jQuery("#selectedRegFeeValue").val(${childLessThanFiveYearRegistrationFee});
 }
+		}
 }
 
 if(MODEL.patientAttributes[14]=="Non-Paying"){
@@ -858,16 +904,22 @@ jQuery("#printableRegistrationFee").append("<span style='margin:5px;'>" + select
 				<div id="printableFileNumber"></div>
 				</td>
 		</tr>
+	
 		<tr id="printableRegistrationFeeForRevisitRow">			
 				<td><b>Registration Fee:</b></td>
 				<td>${registrationFee}</td>
 		</tr>
+		
+	
 		<tr id="printableRegistrationFeeForFirstVisitAndReprintRow">
 				<td><b>Registration Fee:</b></td>
 				<td>
 				<div id="printableRegistrationFee"></div>
 				</td>
 		</tr>
+ <tr style="display:none" id="patientrevisit">
+						<td colspan="3"  align="left"><font color="#ff0000 ">(Patient Revisit with in 24 hr) </font></td> </tr>
+	
 		<tr id="printableUserRow">			
 				<td><b>You were served by:</b>&nbsp;&nbsp;&nbsp;&nbsp;</td>
 				<td>${user}</td>

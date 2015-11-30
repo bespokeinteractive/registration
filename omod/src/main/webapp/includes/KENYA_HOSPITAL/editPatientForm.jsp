@@ -652,7 +652,7 @@ input, select, textarea {
 				return false;
 			}
 			
-			if (jQuery("#patientMaritalStatus").val() == "Marital") {
+		/*	if (jQuery("#patientMaritalStatus").val() == "Marital") {
 				alert("Please select marital status of the patient");
 				return false;
 			} 
@@ -661,7 +661,7 @@ input, select, textarea {
 				alert("Please select religion of the patient");
 				return false;
 			} 
-			
+			*/
 			if (StringUtils.isBlank(jQuery("#patientPostalAddress").val())) {
 				alert("Please enter the physical address of the patient");
 				return false;
@@ -1101,7 +1101,7 @@ input, select, textarea {
 			</tr>
 			<tr>
 				<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-				<td>Marital Status<label style="color:red">*</label>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+				<td>Marital Status</td>
 				<td><select id="maritalStatus" name="person.attribute.26" style='width: 152px;'>
 										<option value="Marital"></option>
 										<option value="Single">Single</option>
@@ -1115,7 +1115,7 @@ input, select, textarea {
 			</tr>
 			<tr>
 				<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-				<td>Religion<label style="color:red">*</label>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+				<td>Religion</td>
 				<td><select id="patientReligion" name="person.attribute.${personAttributeReligion.id}" style='width: 152px;'>	
 					</select>
 				</td>
