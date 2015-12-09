@@ -4,9 +4,9 @@
 	<parent>
 		<groupId>org.openmrs.module</groupId>
 		<artifactId>registration</artifactId>
-		<version>2.3.1</version>
+		<version>2.3.1-SNAPSHOT</version>
 	</parent>
-	<groupId>org.openmrs.module</groupId>
+
 	<artifactId>registration-api</artifactId>
 	<packaging>jar</packaging>
 	<name>Registration API</name>
